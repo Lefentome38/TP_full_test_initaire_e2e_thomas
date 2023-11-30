@@ -1,3 +1,5 @@
+import { rmSync } from "fs"
+
 export function CalculerHeure(lune: number, terre: number, soleil: number): string{
 
     let resultat = lune + terre + soleil
@@ -16,35 +18,39 @@ export function CalculerHeure(lune: number, terre: number, soleil: number): stri
 }
 
 export function sum(lune: number, terre: number, soleil: number) {
-    
+
     let resultat = 0
-    let terre_plus = 0
-    let lune_soustraction = 0
-    let lune_division = 0
-
-    if (terre === 1 ) {
-        terre_plus = 2
-    }else{
-        resultat = 6
-        return resultat
+    
+    if (soleil === 1) {
+        resultat = lune + soleil
     }
+    else{
+
+        resultat = lune + (terre * 2) + soleil
+
+        if (terre === 2) {
+            return resultat = 6
+        }
+        if (terre === 1 ) {
+            resultat = resultat + 2 
+        }
+    }
+    
     if (lune === 1) {
-        lune_soustraction = -2
-    }else{
-
+        resultat = resultat - 2
     }
-    
-    resultat = lune + terre + soleil + terre_plus + lune_soustraction
-    
+        
+    if (lune === 2) {
+        resultat = resultat / 2
+    }
+
     return resultat
+
 }
 
-// - le cadran de la lune :
-//     - 1 : réduit le total de 2
-//     - 2 : divise le total par 2
-// - le cadran de la terre :
-//     - 1 : ajoute 2 au total
-//     - 2 : le resultat total est 6
-// - le cadran du soleil :
-//     - 1 : n'utilise pas le cadran de la terre
-//     - 2 : double la valeur du cadran de la terre (pas le pouvoir)
+// lune 1: -2
+// lune 2: /2
+// terre 1: +2
+// terre 2: resultat = 6
+// soleil 1: supprime le cadran terre
+// soleil 2: double le cadran de la terre (sans le pouvoir)  
